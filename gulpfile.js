@@ -11,6 +11,11 @@ gulp.task("scripts", function(){
 	.pipe(gulp.dest("static/script"));
 });
 
+gulp.task("libs", function(){
+	return gulp.src("static_src/script/lib/*")
+	.pipe(gulp.dest("static/script"));
+});
+
 gulp.task("styles", function(){
 	return gulp.src("static_src/*.css")
 	.pipe(cssmin({compatibility: "ie7", restructuring: false}))
@@ -26,8 +31,9 @@ gulp.task("images", function(){
 
 gulp.task("watch", function(){
 	gulp.watch("static_src/script/*.js", ["scripts"]);
+	gulp.watch("static_src/script/lib/*", ["libs"]);
 	gulp.watch("static_src/*.css", ["styles"]);
 	gulp.watch("static_src/images/*", ["images"]);
 });
 
-gulp.task("default", ["scripts", "styles", "images"]);
+gulp.task("default", ["scripts", "libs", "styles", "images"]);

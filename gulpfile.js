@@ -24,7 +24,7 @@ gulp.task("styles", function(){
 });
 
 gulp.task("images", function(){
-	return gulp.src("static_src/images/*")
+	return gulp.src("static_src/images/**/*")
 	.pipe(imagemin({progressive: true}))
 	.pipe(gulp.dest("static/images"));
 });

@@ -33,7 +33,7 @@ gulp.task("watch", function(){
 	gulp.watch("static_src/script/*.js", ["scripts"]);
 	gulp.watch("static_src/script/lib/*", ["libs"]);
 	gulp.watch("static_src/*.css", ["styles"]);
-	gulp.watch("static_src/images/*", ["images"]);
+	gulp.watch("static_src/images/**/*", ["images"]);
 });
 
 gulp.task("default", ["scripts", "libs", "styles", "images"]);

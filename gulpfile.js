@@ -3,6 +3,7 @@ var uglify = require("gulp-uglify");
 var rename = require("gulp-rename");
 var cssmin = require("gulp-minify-css");
 var imagemin = require("gulp-imagemin");
+var pngquant = require("imagemin-pngquant");
 
 gulp.task("scripts", function(){
 	return gulp.src("static_src/script/*.js")
@@ -25,7 +26,10 @@ gulp.task("styles", function(){
 
 gulp.task("images", function(){
 	return gulp.src("static_src/images/**/*")
-	.pipe(imagemin({progressive: true}))
+	.pipe(imagemin({
+		progressive: true,
+		use: [pngquant()]
+	}))
 	.pipe(gulp.dest("static/images"));
 });
 

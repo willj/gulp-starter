@@ -4,9 +4,12 @@ var rename = require("gulp-rename");
 var cssmin = require("gulp-minify-css");
 var imagemin = require("gulp-imagemin");
 var pngquant = require("imagemin-pngquant");
+var newer = require("gulp-newer");
+var concat = require("gulp-concat");
 
 gulp.task("scripts", function(){
 	return gulp.src("static_src/script/*.js")
+	.pipe(concat('app.js'))
 	.pipe(uglify())
 	.pipe(rename({extname: ".min.js"}))
 	.pipe(gulp.dest("static/script"));
@@ -25,10 +28,11 @@ gulp.task("styles", function(){
 });
 
 gulp.task("images", function(){
-	return gulp.src("static_src/images/**/*")
+    return gulp.src("static_src/images/**/*")
+    .pipe(newer("static/images"))
 	.pipe(imagemin({
 		progressive: true,
-		use: [pngquant()]
+		use: [pngquant({ quality: '65-80', speed: 4 })]
 	}))
 	.pipe(gulp.dest("static/images"));
 });

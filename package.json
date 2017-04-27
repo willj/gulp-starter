@@ -16,6 +16,7 @@
     "gulp-newer": "*",
     "gulp-rename": "*",
     "gulp-uglify": "*",
-    "imagemin-pngquant": "*"
+    "imagemin-pngquant": "*",
+    "gulp-sass": "*"
   }
 }

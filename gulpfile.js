@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var uglify = require("gulp-uglify");
 var rename = require("gulp-rename");
+var sass = require("gulp-sass");
 var cssmin = require("gulp-clean-css");
 var imagemin = require("gulp-imagemin");
 var pngquant = require("imagemin-pngquant");
@@ -18,6 +19,14 @@ gulp.task("scripts", function(){
 gulp.task("libs", function(){
 	return gulp.src("static_src/script/lib/*")
 	.pipe(gulp.dest("static/script"));
+});
+
+gulp.task("sass", function(){
+	return gulp.src("static_src/**/*.scss")
+	.pipe(sass().on('error', sass.logError))
+	.pipe(cssmin({compatibility: "ie7", restructuring: false}))
+	.pipe(rename({extname: ".min.css"}))
+	.pipe(gulp.dest("static"));
 });
 
 gulp.task("styles", function(){
@@ -44,4 +53,4 @@ gulp.task("watch", function(){
 	gulp.watch("static_src/images/**/*", ["images"]);
 });
 
-gulp.task("default", ["scripts", "libs", "styles", "images"]);
+gulp.task("default", ["scripts", "libs", "sass", "styles", "images"]);
